@@ -74,6 +74,11 @@
 		select title from myboard where writer = #{id} and board_type = 1 order by idx desc
 	</select>
 	
+	<!-- 시작번호와 끝번호를 받아서 해당 리스트 출력   -->
+	<select id="foodlist" parameterType="String" resultType="com.ict.vo.VO">	
+		select restaurant from myproject_vo where id = #{id}
+	</select>
+	
 	
 	
 	<select id="master" parameterType="com.ict.vo.MVO" resultType="int">
@@ -103,6 +108,10 @@
 	
 	<delete id="del" parameterType="String">
 		delete from myboard where idx = #{idx}
+	</delete>
+	
+	<delete id="del_food" parameterType="String">
+		delete from myproject_vo where id = #{id}
 	</delete>
 	
 	<update id="pw_up" parameterType="com.ict.vo.MVO">

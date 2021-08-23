@@ -3,67 +3,50 @@ package com.ict.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class VO {
-	private String idx, writer, title, content, pwd, hit, groups, step, lev, regdate, file_name;
+	private String id, Food_name, restaurant, place, file_name;
 	private MultipartFile f_name ;
-	public String getIdx() {
-		return idx;
+	private int star;
+	private int like;
+	
+	
+	public String getId() {
+		return id;
 	}
-	public void setIdx(String idx) {
-		this.idx = idx;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getWriter() {
-		return writer;
+	public int getLike() {
+		return like;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public String getFood_name() {
+		return Food_name;
 	}
-	public String getTitle() {
-		return title;
+	public void setFood_name(String food_name) {
+		Food_name = food_name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public String getRestaurant() {
+		return restaurant;
 	}
-	public String getContent() {
-		return content;
+	public void setRestaurant(String restaurant) {
+		this.restaurant = restaurant;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public String getPlace() {
+		return place;
 	}
-	public String getPwd() {
-		return pwd;
+	public void setPlace(String place) {
+		this.place = place;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public int getStar() {
+		return star;
 	}
-	public String getHit() {
-		return hit;
+	public void setStar(int star) {
+		this.star = star;
 	}
-	public void setHit(String hit) {
-		this.hit = hit;
+	public int isLike() {
+		return like;
 	}
-	public String getGroups() {
-		return groups;
-	}
-	public void setGroups(String groups) {
-		this.groups = groups;
-	}
-	public String getStep() {
-		return step;
-	}
-	public void setStep(String step) {
-		this.step = step;
-	}
-	public String getLev() {
-		return lev;
-	}
-	public void setLev(String lev) {
-		this.lev = lev;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setLike(int like) {
+		this.like = like;
 	}
 	public String getFile_name() {
 		return file_name;
@@ -79,5 +62,4 @@ public class VO {
 	}
 	
 	
-
 }

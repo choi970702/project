@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.vo.BVO;
 import com.ict.vo.MVO;
+import com.ict.vo.VO;
 
 @Repository
 public class MyDAOImpl implements MyDAO
@@ -117,7 +118,12 @@ public class MyDAOImpl implements MyDAO
 	
 	@Override
 	public List<BVO> selectmyList2(String id) throws Exception {
-		return sqlSessionTemplate.selectOne("myproject.mylist2", id);
+		return sqlSessionTemplate.selectList("myproject.mylist2", id);
+	}
+	
+	@Override
+	public List<VO> selectfoodList(String id) throws Exception {
+		return sqlSessionTemplate.selectList("myproject.foodlist", id);
 	}
 
 	@Override
@@ -153,6 +159,11 @@ public class MyDAOImpl implements MyDAO
 	@Override
 	public int delete(String idx) throws Exception {
 		return sqlSessionTemplate.delete("myproject.del", idx);
+	}
+	
+	@Override
+	public int deletefood(String id) throws Exception {
+		return sqlSessionTemplate.delete("myproject.del_food", id);
 	}
 
 	@Override

@@ -26,7 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.service.MyService;
 import com.ict.service.Paging;
 import com.ict.vo.BVO;
+import com.ict.vo.FVO;
 import com.ict.vo.MVO;
+import com.ict.vo.VO;
 import com.mysql.cj.Session;
 
 @Controller
@@ -234,6 +236,20 @@ public class MyController
 		return null;
 	}
 	
+	@RequestMapping("food_del.do")
+	public ModelAndView food_delCommand(@ModelAttribute("cPage")String cPage, @ModelAttribute("id")String id)
+	{
+		try {
+			int result = myservice.deletefood(id);
+			if (result == 1) {
+				return new ModelAndView("redirect:mypage.do");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
 	@RequestMapping("mypage.do")
 	public ModelAndView mypageCommand(@ModelAttribute("cPage")String cPage, HttpSession session)
 	{
@@ -273,11 +289,13 @@ public class MyController
 			if (paging.getEndBlock() > paging.getTotalPage()) {
 				paging.setEndBlock(paging.getTotalPage());
 			}
-			// String id = (String)session.getAttribute("id");
+			String id = (String)session.getAttribute("id");
 			List<BVO> mylist = myservice.selectmyList(paging.getBegin(), paging.getEnd());
 			
-			// List<BVO> mylist2 = myservice.selectmyList2(id);
-			mv.addObject("mylist", mylist);
+			List<BVO> mylist2 = myservice.selectmyList2(id);
+			List<VO> foodlist = myservice.selectfoodList(id);
+			mv.addObject("mylist2", mylist2);
+			mv.addObject("foodlist", foodlist);
 			mv.addObject("pvo", paging);
 
 			return mv;

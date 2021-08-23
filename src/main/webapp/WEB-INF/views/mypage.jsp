@@ -100,6 +100,10 @@
 		alert("변경성공");
 		location.href="tel_change.do?cPage=${cPage}&id=${id}&phone="+f.phone.value;
 	}
+	function food_del(f) {
+		alert("즐겨 찾기 취소");
+		location.href="food_del.do?cPage=${cPage}&id="+f;
+	}
 </script>
 </head>
 <body>
@@ -130,13 +134,13 @@
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-							<c:when test="${empty mylist}">
+							<c:when test="${empty mylist2}">
 								<tr>
 									<td colspan="4"><h2>원하시는 자료가 존재하지 않습니다</h2></td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="k" items="${mylist}" varStatus="vs">
+								<c:forEach var="k" items="${mylist2}" varStatus="vs">
 									<tr>
 										<td style="text-align: left;"><a
 											href="board_onelist.do?idx=${k.idx}&cPage=${pvo.nowPage}">${k.title }</a>
@@ -273,17 +277,85 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<c:choose>
+					<c:when test="${login_ok == '1' }">
+						<c:choose>
+							<c:when test="${u_id == '2' } ">
+								<%-- <tr>
+									<td style="text-align: left;"><a
+										href="onelist.do?id=${k.id}&cPage=${pvo.nowPage}">${k.restaurant }</a>
+									</td> 가게 등록
+									<td><button onclick="food_del(${k.id})">삭제</button></td>
+								</tr> --%>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="k" items="${foodlist}" varStatus="vs">
+									<tr>
+										<td style="text-align: left;"><a
+											href="onelist.do?id=${k.id}&cPage=${pvo.nowPage}">${k.restaurant }</a>
+										</td>
+										<td><button onclick="food_del(${k.id})">삭제</button></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td>로그인을 해야 이용할수 있습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				<!-- <tr>
 					<td>가게 1</td>
 					<td><button>삭제</button></td>
 				</tr>
 				<tr>
 					<td>가게 2</td>
 					<td><button>삭제</button></td>
-				</tr>
+				</tr> -->
 			</tbody>
 			<tfoot>
-				
+				<tr>
+					<td colspan="4">
+						
+						<c:choose>
+							<c:when test="${pvo.beginBlock <= pvo.pagePerBlock }">
+								<span style="color: gray; padding: 5px; border: 1px solid gray">이전으로</span>
+							</c:when>
+							<c:otherwise>
+								<span style="color: tomato; padding: 5px; border: 1px solid tomato">
+									<a href="mypage.do?cPage=${pvo.beginBlock-pvo.pagePerBlock}">이전으로</a>
+								</span>
+							</c:otherwise>
+						</c:choose>
+						&nbsp;&nbsp;
+						
+				  	 <c:forEach begin="${pvo.beginBlock }" end="${pvo.endBlock }" step="1" var="k">
+						   	<c:choose>
+									<c:when test="${k==pvo.nowPage}">
+										<span style="background-color: tomato; padding: 5px;">${k}</span></c:when>
+									<c:otherwise>
+										<span style="color: tomato; padding: 5px;">
+											<a href="mypage.do?cPage=${k}">${k}</</a>
+										</span>
+									</c:otherwise>
+								</c:choose>
+					   </c:forEach>
+						&nbsp;&nbsp;
+						
+						<c:choose>
+							<c:when test="${pvo.endBlock >= pvo.totalPage }">
+								<span style="color: gray; padding: 5px; border: 1px solid gray">다음으로</span>
+							</c:when>
+							<c:otherwise>
+								<span style="color: tomato; padding: 5px; border: 1px solid tomato">
+									<a href="mypage.do?cPage=${pvo.beginBlock+pvo.pagePerBlock}">다음으로</a>
+								</span>
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
 			</tfoot>
 		</table>
 	</div>

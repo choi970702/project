@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ict.vo.BVO;
 import com.ict.vo.MVO;
+import com.ict.vo.VO;
 
 public interface MyDAO 
 {
@@ -65,6 +66,9 @@ public interface MyDAO
 	// 원글 리스트
 	List<BVO> selectmyList2(String id) throws Exception;
 	
+	// 원글 리스트
+	List<VO> selectfoodList(String id) throws Exception;
+	
 	// 관리자 확인
 	int selectMaster(MVO mvo) throws Exception;
 	
@@ -85,6 +89,9 @@ public interface MyDAO
 	
 	// 원글 삭제
 	int delete(String idx) throws Exception;
+	
+	// foodlist 삭제
+	int deletefood(String id) throws Exception;
 	
 	// 비번 바꾸기
 	int updatePw(MVO mvo) throws Exception;

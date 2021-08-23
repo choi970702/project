@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ict.dao.MyDAO;
 import com.ict.vo.BVO;
 import com.ict.vo.MVO;
+import com.ict.vo.VO;
 
 @Service
 public class MyServiceImpl implements MyService
@@ -111,6 +112,11 @@ public class MyServiceImpl implements MyService
 		return myDAO.selectmyList2(id);
 	}
 	
+	@Override
+	public List<VO> selectfoodList(String id) throws Exception {
+		return myDAO.selectfoodList(id);
+	}
+	
 
 	@Override
 	public int selectMaster(MVO mvo) throws Exception {
@@ -145,6 +151,11 @@ public class MyServiceImpl implements MyService
 	@Override
 	public int delete(String idx) throws Exception {
 		return myDAO.delete(idx);
+	}
+	
+	@Override
+	public int deletefood(String id) throws Exception {
+		return myDAO.deletefood(id);
 	}
 
 	@Override

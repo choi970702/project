@@ -1,12 +1,29 @@
 package com.ict.vo;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class FVO {
-	private String Food_name, restaurant, place, file_name;
-	private MultipartFile f_name ;
-	private float star;
-	private boolean like;
+	private String idx, writer, content, Food_name, restaurant, place;
+	
+	
+	
+	public String getIdx() {
+		return idx;
+	}
+	public void setIdx(String idx) {
+		this.idx = idx;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getFood_name() {
 		return Food_name;
 	}
@@ -25,30 +42,7 @@ public class FVO {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public float getStar() {
-		return star;
-	}
-	public void setStar(float star) {
-		this.star = star;
-	}
-	public boolean isLike() {
-		return like;
-	}
-	public void setLike(boolean like) {
-		this.like = like;
-	}
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
-	public MultipartFile getF_name() {
-		return f_name;
-	}
-	public void setF_name(MultipartFile f_name) {
-		this.f_name = f_name;
-	}
+	
 	
 	
 }
