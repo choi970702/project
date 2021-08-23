@@ -87,6 +87,11 @@ public class MyDAOImpl implements MyDAO
 	}
 	
 	@Override
+	public int selectCount2() throws Exception {
+		return sqlSessionTemplate.selectOne("myproject.count2");
+	}
+	
+	@Override
 	public List<BVO> selectList(int begin, int end) throws Exception {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("begin", begin);
@@ -100,6 +105,19 @@ public class MyDAOImpl implements MyDAO
 		map.put("begin", begin);
 		map.put("end", end);
 		return sqlSessionTemplate.selectList("myproject.list2", map);
+	}
+	
+	@Override
+	public List<BVO> selectmyList(int begin, int end) throws Exception {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("begin", begin);
+		map.put("end", end);
+		return sqlSessionTemplate.selectList("myproject.mylist", map);
+	}
+	
+	@Override
+	public List<BVO> selectmyList2(String id) throws Exception {
+		return sqlSessionTemplate.selectOne("myproject.mylist2", id);
 	}
 
 	@Override

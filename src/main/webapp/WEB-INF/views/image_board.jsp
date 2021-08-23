@@ -13,6 +13,7 @@
 		height: 2%;
 		border: 2px solid black;
 	}
+	
 	a
 	{
 		text-decoration: none;
@@ -61,16 +62,10 @@
 	}
 </style>
 <script type="text/javascript">
-	function writeok(f) 
+	function main() 
 	{
-		alert("저장");
-		f.action="board_ok2.do?";
-		f.submit();
-	}
-	function writeno() 
-	{
-		alert("취소");
-		location.href="board.do?cPage=${cPage}";
+		alert("메인 페이지로 이동");
+		location.href="main.do?cPage=${cPage}";
 	}
 </script>
 </head>
@@ -79,7 +74,6 @@
 	<%@ include file="top.jsp" %>
 	<div>
 		<fieldset>
-			<form method="post" enctype="multipart/form-data" >
 			<table>
 				<thead>
 					<tr>
@@ -89,35 +83,35 @@
 				<tbody>
 					<tr>
 						<td style="width: 20%; height: 5%;">작성자</td>
-						<c:choose>
-							<c:when test="${login_ok == '1' }">
-								<td colspan="2"><input type="text" name="id" value="${id }" readonly="readonly"></td>
-							</c:when>
-							<c:otherwise>
-								<td colspan="2"><input type="text" name="id" value="비회원" readonly="readonly"></td>
-							</c:otherwise>
-						</c:choose>
+						<td>${bvo.writer }</td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2"><input type="text" name="content" placeholder="내용입력" required></td>
+						<td>${bvo.content }</td>
 					</tr>
 					<tr>
-						<td style="height: 5%;">첨부파일</td>
-						<td><input type="file" name="f_name"></td>
+						<td>첨부파일</td>
+						<c:choose>
+						<c:when test="${!empty bvo.file_name}">
+							<td style="text-align: center">
+								<img alt="" src="resources/image/${bvo.file_name }" style="width: 150px;"><br>
+								<a href="download.do?file_name=${bvo.file_name }">${bvo.file_name}</a> 
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td><b>첨부파일없음</b></td>
+						</c:otherwise>
+					</c:choose>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3">
-							<button value="" onclick="writeok(this.form)">저장</button>
-							<button value="" onclick="writeno()">취소</button>
-							<input type="hidden" name="cPage" value="${cPage }">
+						<td colspan="2">
+							<button value="" onclick="main()">메인 페이지로 이동</button>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-			</form>
 		</fieldset>
 	</div>
 	<div>

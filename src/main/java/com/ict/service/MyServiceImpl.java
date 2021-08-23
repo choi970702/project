@@ -87,6 +87,11 @@ public class MyServiceImpl implements MyService
 	}
 	
 	@Override
+	public int selectCount2() throws Exception {
+		return myDAO.selectCount2();
+	}
+	
+	@Override
 	public List<BVO> selectList(int begin, int end) throws Exception {
 		return myDAO.selectList(begin, end);
 	}
@@ -95,6 +100,17 @@ public class MyServiceImpl implements MyService
 	public List<BVO> selectList2(int begin, int end) throws Exception {
 		return myDAO.selectList2(begin, end);
 	}
+	
+	@Override
+	public List<BVO> selectmyList(int begin, int end) throws Exception {
+		return myDAO.selectmyList(begin, end);
+	}
+	
+	@Override
+	public List<BVO> selectmyList2(String id) throws Exception {
+		return myDAO.selectmyList2(id);
+	}
+	
 
 	@Override
 	public int selectMaster(MVO mvo) throws Exception {

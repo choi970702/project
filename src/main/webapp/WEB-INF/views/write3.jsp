@@ -38,7 +38,7 @@
 		text-align: center;
 		margin: auto;
 	}
-	table
+	table, form
 	{
 		width: 90%;
 		height: 90%;

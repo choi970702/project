@@ -123,19 +123,31 @@
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${empty list}">
-				 	  <tr><td colspan="4"><h2>원하시는 자료가 존재하지 않습니다</h2></td></tr>
+					<c:when test="${login_ok != '1' }">
+						<tr>
+							<td colspan="4"><h2>로그인 먼저 하세요</h2></td>
+						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="k" items="${list}" varStatus="vs">
-							<tr>
-								<td style="text-align: left;">
-								<a href="board_onelist.do?idx=${k.idx}&cPage=${pvo.nowPage}">${k.title }</a>
-								</td>
-								<td><button onclick="write2(${k.idx})">수정하기</button></td>
-								<td><button onclick="del(${k.idx})">삭제</button></td>
-							</tr>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${empty mylist}">
+								<tr>
+									<td colspan="4"><h2>원하시는 자료가 존재하지 않습니다</h2></td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="k" items="${mylist}" varStatus="vs">
+									<tr>
+										<td style="text-align: left;"><a
+											href="board_onelist.do?idx=${k.idx}&cPage=${pvo.nowPage}">${k.title }</a>
+										</td>
+										<td><button onclick="write2(${k.idx})">수정하기</button></td>
+										<td><button onclick="del(${k.idx})">삭제</button></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+
 					</c:otherwise>
 				</c:choose>
 				<!-- <tr>
@@ -153,7 +165,46 @@
 				</tr> -->
 			</tbody>
 			<tfoot>
-				
+				<tr>
+					<td colspan="4">
+						
+						<c:choose>
+							<c:when test="${pvo.beginBlock <= pvo.pagePerBlock }">
+								<span style="color: gray; padding: 5px; border: 1px solid gray">이전으로</span>
+							</c:when>
+							<c:otherwise>
+								<span style="color: tomato; padding: 5px; border: 1px solid tomato">
+									<a href="mypage.do?cPage=${pvo.beginBlock-pvo.pagePerBlock}">이전으로</a>
+								</span>
+							</c:otherwise>
+						</c:choose>
+						&nbsp;&nbsp;
+						
+				  	 <c:forEach begin="${pvo.beginBlock }" end="${pvo.endBlock }" step="1" var="k">
+						   	<c:choose>
+									<c:when test="${k==pvo.nowPage}">
+										<span style="background-color: tomato; padding: 5px;">${k}</span></c:when>
+									<c:otherwise>
+										<span style="color: tomato; padding: 5px;">
+											<a href="mypage.do?cPage=${k}">${k}</</a>
+										</span>
+									</c:otherwise>
+								</c:choose>
+					   </c:forEach>
+						&nbsp;&nbsp;
+						
+						<c:choose>
+							<c:when test="${pvo.endBlock >= pvo.totalPage }">
+								<span style="color: gray; padding: 5px; border: 1px solid gray">다음으로</span>
+							</c:when>
+							<c:otherwise>
+								<span style="color: tomato; padding: 5px; border: 1px solid tomato">
+									<a href="mypage.do?cPage=${pvo.beginBlock+pvo.pagePerBlock}">다음으로</a>
+								</span>
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
 			</tfoot>
 		</table>
 		

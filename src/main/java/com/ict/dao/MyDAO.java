@@ -50,11 +50,20 @@ public interface MyDAO
 	// 게시물의 수
 	int selectCount() throws Exception;
 	
+	// 게시물의 수
+	int selectCount2() throws Exception;
+	
 	// 원글 리스트
 	List<BVO> selectList(int begin, int end) throws Exception;
 	
 	// 원글 리스트
 	List<BVO> selectList2(int begin, int end) throws Exception;
+	
+	// 원글 리스트
+	List<BVO> selectmyList(int begin, int end) throws Exception;
+	
+	// 원글 리스트
+	List<BVO> selectmyList2(String id) throws Exception;
 	
 	// 관리자 확인
 	int selectMaster(MVO mvo) throws Exception;

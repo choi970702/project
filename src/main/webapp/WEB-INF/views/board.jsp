@@ -130,6 +130,9 @@
 	{
 		location.href="board.do?cPage=${cPage}";
 	}
+	function image_click(f) {
+		location.href="image_board.do?cPage=${cPage}&idx="+f;
+	}
 </script>
 </head>
 <body>
@@ -245,7 +248,12 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							
+							<c:forEach var="k" items="${list2}" varStatus="vs">
+							<tr>
+								<td style="width: 30%;"><img onclick="image_click(${k.idx})" src="resources/image/${k.file_name }"></td>
+								<td>${k.content}</td>
+							</tr>
+						</c:forEach>
 						</c:otherwise>
 					</c:choose>
 					

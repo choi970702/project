@@ -27,6 +27,7 @@ import com.ict.service.MyService;
 import com.ict.service.Paging;
 import com.ict.vo.BVO;
 import com.ict.vo.MVO;
+import com.mysql.cj.Session;
 
 @Controller
 public class MyController 
@@ -160,6 +161,8 @@ public class MyController
 				mv.addObject("list",list);
 				
 			}
+			
+			
 			List<BVO> list2 = myservice.selectList2(paging.getBegin(), paging.getEnd());
 			if (list2 != null) {
 				mv.addObject("list2",list2);
@@ -232,11 +235,12 @@ public class MyController
 	}
 	
 	@RequestMapping("mypage.do")
-	public ModelAndView mypageCommand(@ModelAttribute("cPage")String cPage)
+	public ModelAndView mypageCommand(@ModelAttribute("cPage")String cPage, HttpSession session)
 	{
 		try {
-			ModelAndView mv = new ModelAndView("mypage");
 			
+			ModelAndView mv = new ModelAndView("mypage");
+
 			// 전체 게시물의 수
 			int count = myservice.selectCount();
 			paging.setTotalRecord(count);
@@ -254,7 +258,7 @@ public class MyController
 			}
 			// 현재 페이지 구하기
 			paging.setNowPage(Integer.parseInt(cPage));
-			
+
 			// 시작번호, 끝번호
 			paging.setBegin((paging.getNowPage() - 1) * paging.getNumPerPage() + 1);
 			paging.setEnd((paging.getBegin() - 1) + paging.getNumPerPage());
@@ -269,11 +273,13 @@ public class MyController
 			if (paging.getEndBlock() > paging.getTotalPage()) {
 				paging.setEndBlock(paging.getTotalPage());
 			}
-			List<BVO> list = myservice.selectList(paging.getBegin(), paging.getEnd());
+			// String id = (String)session.getAttribute("id");
+			List<BVO> mylist = myservice.selectmyList(paging.getBegin(), paging.getEnd());
 			
-			mv.addObject("list",list);
+			// List<BVO> mylist2 = myservice.selectmyList2(id);
+			mv.addObject("mylist", mylist);
 			mv.addObject("pvo", paging);
-			
+
 			return mv;
 			
 		} catch (Exception e) {
@@ -340,6 +346,7 @@ public class MyController
 			if (result == 1) 
 			{
 				session.setAttribute("id", mvo.getId());
+				session.setAttribute("idx", mvo.getIdx());
 				session.setAttribute("u_id", mvo.getU_id());
 				session.setAttribute("login_ok", "1");
 				return "1";
@@ -524,13 +531,12 @@ public class MyController
 		return null;
 	}
 	
-	// 페이지 안넘어감!!!!!!!!!!!!!!!!!!!!!!!!
 	@RequestMapping(value = "board_ok2.do", method = RequestMethod.POST)
-	public ModelAndView board_ok2Command(HttpServletRequest request, @ModelAttribute("cPage")String cPage)
+	public ModelAndView board_ok2Command(BVO bvo, HttpServletRequest request, @ModelAttribute("cPage")String cPage)
 	{
 		try 
 		{
-			BVO bvo = new BVO();
+			// BVO bvo = new BVO();
 			
 			String path = request.getSession().getServletContext().getRealPath("/resources/image");
 			
@@ -551,15 +557,31 @@ public class MyController
 					File out = new File(path, bvo.getFile_name());
 					FileCopyUtils.copy(in, out);
 				}
-				return new ModelAndView("redirect:board.do");
+				return new ModelAndView("redirect:board.do?cPage="+cPage);
 				
 			}else
 			{
-				return new ModelAndView("redirect:write2.do");
+				return new ModelAndView("redirect:write2.do?cPage="+cPage);
 			}
 		} catch (Exception e) 
 		{
 			// TODO: handle exception
+		}
+		return null;
+	}
+	
+	@RequestMapping("image_board.do")
+	public ModelAndView image_boardCommand(@ModelAttribute("cPage")String cPage, @ModelAttribute("idx")String idx)
+	{
+		try {
+			ModelAndView mv = new ModelAndView("image_board");
+			BVO bvo = myservice.selectOneList(idx);
+			if (bvo != null) {
+				mv.addObject("bvo", bvo);
+				return mv;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		return null;
 	}
