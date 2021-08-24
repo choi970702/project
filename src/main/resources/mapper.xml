@@ -44,29 +44,32 @@
  	
 	<!-- 시작번호와 끝번호를 받아서 해당 리스트 출력   -->
 	<select id="list" parameterType="Map" resultType="com.ict.vo.BVO">	
-		select * from (
+		<!-- select * from (
 			select rownum r_num, a.* from (
 				select * from myboard where board_type = 1 order by idx desc
 			) a
-		) where r_num between #{begin} and #{end}
+		) where r_num between #{begin} and #{end} -->
+		select * from myboard where board_type = 1 order by idx desc
 	</select>
 	
 	<!-- list2 -->
 	<select id="list2" parameterType="Map" resultType="com.ict.vo.BVO">	
-		select * from (
+		<!-- select * from (
 			select rownum r_num, a.* from (
 				select * from myboard where board_type = 2 order by idx desc
 			) a
-		) where r_num between #{begin} and #{end}
+		) where r_num between #{begin} and #{end} -->
+		select * from myboard where board_type = 2 order by idx desc
 	</select>
 	
 	<!-- 시작번호와 끝번호를 받아서 해당 리스트 출력   -->
 	<select id="mylist" parameterType="map" resultType="com.ict.vo.BVO">	
-		select * from (
+		<!-- select * from (
 			select rownum r_num, a.* from (
 				select * from myboard where board_type = 1 order by idx desc
 			) a
-		) where r_num between #{begin} and #{end}
+		) where r_num between #{begin} and #{end} -->
+		select * from myboard where board_type = 1 order by idx desc
 	</select>
 	
 	<!-- 시작번호와 끝번호를 받아서 해당 리스트 출력   -->

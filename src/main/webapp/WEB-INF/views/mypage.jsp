@@ -104,6 +104,10 @@
 		alert("즐겨 찾기 취소");
 		location.href="food_del.do?cPage=${cPage}&id="+f;
 	}
+	function restaurant() {
+		alert("가게 등록하러 갑니다.");
+		location.href="restaurant.do?cPage=${cPage}&id=${id}";
+	}
 </script>
 </head>
 <body>
@@ -272,9 +276,18 @@
 		
 		<table>
 			<thead>
-				<tr>
-					<th colspan="2">좋아하는 음식점 리스트</th>
-				</tr>
+				<c:choose>
+					<c:when test="${u_id == '1' }">
+						<tr>
+							<th colspan="2">좋아하는 음식점 리스트</th>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<th colspan="2">내 가게 관리</th>
+						</tr>
+					</c:otherwise>
+				</c:choose>
 			</thead>
 			<tbody>
 				<c:choose>
@@ -287,10 +300,32 @@
 									</td> 가게 등록
 									<td><button onclick="food_del(${k.id})">삭제</button></td>
 								</tr> --%>
+								<%-- <form>
+									<input type="text" value="" name="Food_name">
+									<input type="text" value="" name="restaurant">
+									<input type="text" value="" name="place">
+									<input type="text" value="" name="phone">
+									<input type="text" value="" name="restaurant_time">
+									<input type="text" value="" name="home">
+									<input type="file" value="" name="f_name">
+									<input type="button" value="">
+									<input type="hidden" value="${id }" name="id" >
+								</form> --%>
+								<c:forEach var="k" items="${foodlist}" varStatus="vs">
+									<tr>
+										<td style="text-align: left;"><a
+											href="onelist.do?id=${k.id}&cPage=${pvo.nowPage}">${k.restaurant }</a>
+										</td>
+									</tr>
+								</c:forEach>
+								<tr>
+									<td><button onclick="restaurant()">등록하러 가기</button></td>
+								</tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="k" items="${foodlist}" varStatus="vs">
 									<tr>
+									<!-- id 말고 restaurant받아가서 아이디 확인해서 삭제하는걸로 수정하자.  -->
 										<td style="text-align: left;"><a
 											href="onelist.do?id=${k.id}&cPage=${pvo.nowPage}">${k.restaurant }</a>
 										</td>

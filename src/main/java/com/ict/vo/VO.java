@@ -3,7 +3,7 @@ package com.ict.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class VO {
-	private String id, Food_name, restaurant, place, file_name;
+	private String id, Food_name, restaurant, place, file_name, phone, home,restaurant_time;
 	private MultipartFile f_name ;
 	private int star;
 	private int like;
@@ -54,12 +54,32 @@ public class VO {
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
 	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getHome() {
+		return home;
+	}
+	public void setHome(String home) {
+		this.home = home;
+	}
+	public String getRestaurant_time() {
+		return restaurant_time;
+	}
+	public void setRestaurant_time(String restaurant_time) {
+		this.restaurant_time = restaurant_time;
+	}
 	public MultipartFile getF_name() {
 		return f_name;
 	}
 	public void setF_name(MultipartFile f_name) {
 		this.f_name = f_name;
 	}
+	
+	
 	
 	
 }

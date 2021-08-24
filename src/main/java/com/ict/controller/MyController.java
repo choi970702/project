@@ -306,6 +306,13 @@ public class MyController
 		return null;
 	}
 	
+	@RequestMapping("restaurant.do")
+	public ModelAndView restaurantCommand(@ModelAttribute("cPage")String cPage, @ModelAttribute("id")String id)
+	{
+		System.out.println(id);
+		return null;
+	}
+	
 	@RequestMapping("loadfind.do")
 	public ModelAndView loadfindCommand()
 	{
